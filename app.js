@@ -1,10 +1,16 @@
-const grid = document.getElementById('grid');
+// Game parameters
+const gridSize = { rows: 30, cols: 30 }
+const gridSpeed = 150;
 
-const gridSize = { rows: 50, cols: 50 }
+// Game play variables
 let direction = 'right';
-
-const snake = [];
 let gameLoop = null;
+
+// Game objects
+const snake = [];
+
+// DOM elements
+const grid = document.getElementById('grid');
 
 const createRandomFoodLocaton = () => {
     const food = {
@@ -76,11 +82,6 @@ const buildGrid = (grid, dimensions) => {
 const onGameLoop = () => {
 
     // Remove the last element of the snake
-    const snakeTail = snake.shift();
-    const snakeTailElement = document.querySelector(`[data-row="${snakeTail.y}-${snakeTail.x}"]`);
-    snakeTailElement.classList.remove('snake');
-
-    // Remove the last element of the snake
     const snakeHead = snake[snake.length - 1];
     const snakeHeadElement = document.querySelector(`[data-row="${snakeHead.y}-${snakeHead.x}"]`);
     snakeHeadElement.classList.remove('head');
@@ -114,6 +115,17 @@ const onGameLoop = () => {
         alert('Game Over');
         return;
     }
+
+    // Have we eaten food?
+    if (!checkForFood(newSnakeHead)) {
+
+        // Remove the last element of the snake
+        const snakeTail = snake.shift();
+        const snakeTailElement = document.querySelector(`[data-row="${snakeTail.y}-${snakeTail.x}"]`);
+        snakeTailElement.classList.remove('snake');
+
+    }
+
     snake.push(newSnakeHead);
 
     // Redraw the snake
@@ -128,7 +140,7 @@ const onGameLoop = () => {
 const startGame = () => {
 
     // Create a timer to run the Game Loop
-    gameLoop = setInterval(() => onGameLoop(), 500);
+    gameLoop = setInterval(() => onGameLoop(), gridSpeed);
 }
 
 const endGame = () => {
@@ -155,6 +167,26 @@ const initApp = () => {
 
     // Add the keydown event listener
     document.addEventListener('keydown', handleKeyDown);
+}
+
+const checkForFood = (snakeHead) => {
+
+    // Check if the snake head is on the food
+    const foodElement = document.querySelector('.food');
+    const foodLocation = foodElement.getAttribute('data-row').split('-');
+    const food = {
+        x: parseInt(foodLocation[1]),
+        y: parseInt(foodLocation[0])
+    }
+
+    if (snakeHead.x === food.x && snakeHead.y === food.y) {
+        foodElement.classList.remove('food');
+        generateFood();
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 const checkForCollision = (snakeHead) => {
