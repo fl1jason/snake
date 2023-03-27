@@ -1,5 +1,5 @@
 // Game parameters
-const gridSize = { rows: 25, cols: 25 }
+const gridSize = { rows: 21, cols: 21 }
 const gameSpeed = 150;
 
 // Game play variables
@@ -131,7 +131,6 @@ const onGameLoop = () => {
         const snakeTail = snake.shift();
         const snakeTailElement = document.querySelector(`[data-row="${snakeTail.y}-${snakeTail.x}"]`);
         snakeTailElement.classList.remove('snake');
-
     }
 
     snake.push(newSnakeHead);

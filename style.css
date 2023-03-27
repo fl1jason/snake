@@ -1,8 +1,9 @@
 :root {
     --blue: #1e90ff;
     --background: green;
+    --grid-frame: #6af70b;
     --white: #ffffff;
-    --snake: yellow;
+    --snake: #6af70b;
     --snake-head: green;
     --food: pink;
     --grid-light: #d7f8d9;
@@ -25,6 +26,16 @@ body {
 #container {
     width: 100%;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#grid-frame {
+    width: 900px;
+    height: 900px;
+    background-color: var(--grid-frame);
     display: flex;
     flex-direction: column;
     align-items: center;
