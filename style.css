@@ -5,14 +5,15 @@
     --snake: yellow;
     --snake-head: green;
     --food: pink;
+    --grid-light: #d7f8d9;
+    --grid-dark: #bbf6be;
 }
 
-
 body {
+    font-family: 'Press Start 2P';
+    font-size: 22px;
     background: var(--background);
     color: #ffffff;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
     line-height: 1.42857143;
     margin: 0;
 }
@@ -31,24 +32,27 @@ body {
 }
 
 #grid {
-
     background-color: red;
 }
 
 .row {
     display: flex;
-    flex-wrap: wrap;
-    margin: 0 -10px;
 }
 
 .grid-item {
-    background-color: var(--blue);
     color: var(--white);
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     font-size: 30px;
     text-align: center;
-    /*border: 1px solid var(--white);*/
+}
+
+.grid-light {
+    background-color: var(--grid-light);
+}
+
+.grid-dark {
+    background-color: var(--grid-dark);
 }
 
 .snake {
@@ -59,8 +63,20 @@ body {
     background-color: var(--snake-head);
 }
 
-.food {
-    background-color: var(--food);
+.food::before {
+    content: "🍎";
+    color: var(--food);
+}
+
+#score {
+    font-size: 30px;
+    color: var(--white);
+    height: 40px;
+    display: flex;
+}
+
+.apple {
+    margin-bottom: 2px;
 }
 
 #game-instructions {

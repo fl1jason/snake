@@ -1,10 +1,11 @@
 // Game parameters
-const gridSize = { rows: 30, cols: 30 }
+const gridSize = { rows: 25, cols: 25 }
 const gridSpeed = 150;
 
 // Game play variables
 let direction = 'right';
 let gameLoop = null;
+let score = 0;
 
 // Game objects
 const snake = [];
@@ -39,12 +40,12 @@ const generateFood = () => {
 
 const createSnake = () => {
 
-    snake.push({ x: 10, y: 25 });
-    snake.push({ x: 11, y: 25 });
-    snake.push({ x: 12, y: 25 });
-    snake.push({ x: 13, y: 25 });
-    snake.push({ x: 14, y: 25 });
-    snake.push({ x: 14, y: 25 });
+    snake.push({ x: 10, y: 12 });
+    snake.push({ x: 11, y: 12 });
+    snake.push({ x: 12, y: 12 });
+    snake.push({ x: 13, y: 12 });
+    snake.push({ x: 14, y: 12 });
+    snake.push({ x: 14, y: 12 });
     return snake;
 }
 
@@ -62,6 +63,7 @@ const drawSnake = (snake) => {
 
 const buildGrid = (grid, dimensions) => {
 
+    let cell = 0;
     const { rows, cols } = dimensions;
     console.log(rows, cols);
 
@@ -71,8 +73,14 @@ const buildGrid = (grid, dimensions) => {
         grid.appendChild(row);
 
         for (let j = 0; j < cols; j++) {
+            cell++;
+
+            const style = cell % 2 === 0 ? 'grid-light' : 'grid-dark';
+
             const col = document.createElement('div');
             col.classList.add('grid-item');
+            col.classList.add(style);
+
             col.setAttribute('data-row', `${i}-${j}`);
             row.appendChild(col);
         }
@@ -153,22 +161,6 @@ const endGame = () => {
     gameOverMessage.classList.remove('hidden');
 }
 
-const initApp = () => {
-
-    // Create the Game grid
-    buildGrid(grid, gridSize);
-
-    // Create the snake
-    const snake = createSnake();
-    drawSnake(snake);
-
-    // Kick off the first food
-    generateFood();
-
-    // Add the keydown event listener
-    document.addEventListener('keydown', handleKeyDown);
-}
-
 const checkForFood = (snakeHead) => {
 
     // Check if the snake head is on the food
@@ -181,11 +173,26 @@ const checkForFood = (snakeHead) => {
 
     if (snakeHead.x === food.x && snakeHead.y === food.y) {
         foodElement.classList.remove('food');
+
+        // Update the score
+        score++;
+        displayScore();
+
+        // Generate a new food
         generateFood();
         return true;
     }
     else {
         return false;
+    }
+}
+
+const displayScore = () => {
+    const scoreElement = document.getElementById('score');
+    scoreElement.textContent = '';
+
+    for (let i = 0; i < score; i++) {
+        scoreElement.textContent += `🍎`;
     }
 }
 
@@ -236,6 +243,22 @@ const handleKeyDown = (e) => {
             direction = 'down';
             break;
     }
+}
+
+const initApp = () => {
+
+    // Create the Game grid
+    buildGrid(grid, gridSize);
+
+    // Create the snake
+    const snake = createSnake();
+    drawSnake(snake);
+
+    // Kick off the first food
+    generateFood();
+
+    // Add the keydown event listener
+    document.addEventListener('keydown', handleKeyDown);
 }
 
 initApp();
