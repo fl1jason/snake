@@ -1,6 +1,6 @@
 // Game parameters
 const gridSize = { rows: 21, cols: 21 }
-const gameSpeed = 150;
+const gameSpeed = 100;
 
 // Game play variables
 let direction = 'right';
