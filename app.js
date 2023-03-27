@@ -1,6 +1,6 @@
 // Game parameters
 const gridSize = { rows: 25, cols: 25 }
-const gridSpeed = 150;
+const gameSpeed = 150;
 
 // Game play variables
 let direction = 'right';
@@ -138,17 +138,16 @@ const onGameLoop = () => {
 
     // Redraw the snake
     drawSnake(snake);
+}
+
+const startGame = () => {
 
     // Hide the Game Instructions message
     const gameInstructions = document.getElementById('game-instructions');
     gameInstructions.textContent = '';
 
-}
-
-const startGame = () => {
-
     // Create a timer to run the Game Loop
-    gameLoop = setInterval(() => onGameLoop(), gridSpeed);
+    gameLoop = setInterval(() => onGameLoop(), gameSpeed);
 }
 
 const endGame = () => {
