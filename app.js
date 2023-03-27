@@ -65,7 +65,6 @@ const buildGrid = (grid, dimensions) => {
 
     let cell = 0;
     const { rows, cols } = dimensions;
-    console.log(rows, cols);
 
     for (let i = 0; i < rows; i++) {
         const row = document.createElement('div');
@@ -73,8 +72,9 @@ const buildGrid = (grid, dimensions) => {
         grid.appendChild(row);
 
         for (let j = 0; j < cols; j++) {
-            cell++;
 
+            // Alternate the background color of the grid
+            cell++;
             const style = cell % 2 === 0 ? 'grid-light' : 'grid-dark';
 
             const col = document.createElement('div');
@@ -196,8 +196,6 @@ const displayScore = () => {
 }
 
 const checkForCollision = (snakeHead) => {
-
-    console.log(snakeHead);
 
     // Check if the snake head is outside the grid
     if (snakeHead.x < 0 || snakeHead.x >= gridSize.cols || snakeHead.y < 0 || snakeHead.y >= gridSize.rows) {
