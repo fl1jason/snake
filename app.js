@@ -1,5 +1,5 @@
 // Game parameters
-const gridSize = { rows: 21, cols: 21 }
+const gridSize = { rows: 15, cols: 15 }
 const gameSpeed = 100;
 
 // Game play variables
@@ -40,12 +40,12 @@ const generateFood = () => {
 
 const createSnake = () => {
 
-    snake.push({ x: 10, y: 12 });
-    snake.push({ x: 11, y: 12 });
-    snake.push({ x: 12, y: 12 });
-    snake.push({ x: 13, y: 12 });
-    snake.push({ x: 14, y: 12 });
-    snake.push({ x: 14, y: 12 });
+    snake.push({ x: 1, y: 7 });
+    snake.push({ x: 2, y: 7 });
+    snake.push({ x: 3, y: 7 });
+    snake.push({ x: 4, y: 7 });
+    snake.push({ x: 5, y: 7 });
+    snake.push({ x: 6, y: 7 });
     return snake;
 }
 
